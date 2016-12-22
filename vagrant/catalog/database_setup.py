@@ -43,6 +43,7 @@ class Bookstore(Base):
        return {
            'id'           : self.id,
            'name'         : self.name,
+           'seller'       : self.seller.email
        }
  
 
@@ -68,6 +69,8 @@ class Book(Base):
            'description'  : self.description,
            'price'        : self.price,
            'category'     : self.category,
+           'bookstore'    : self.bookstore.name,
+           'seller'       : self.seller.email
        }
 
 

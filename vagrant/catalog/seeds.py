@@ -102,7 +102,7 @@ session.commit()
 book2 = Book(seller=seller,
              title="James Smith and the Woods of Secrets",
              description="""James found himself in a strange woods filled with
-             dense fog. Then...""",
+             dense fog. His body was aching all over...""",
              price="$5.99",
              category="Fiction",
              bookstore=bookstore2)
@@ -124,7 +124,7 @@ session.commit()
 book4 = Book(seller=seller,
              title="Master Whoknows",
              description="""Kung Fu master, Whoknows, decided to travel space
-             and time using Anywhere Door which was a dusty family treasure
+             and time using Anywhere Door, which was a dusty family treasure
              saved in a half broken shed...""",
              price="$5.99",
              category="Fiction",
