@@ -1,0 +1,45 @@
+body {
+    background-color: #bbb;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+}
+
+.heading {
+    font-family: 'Roboto Slab', serif;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.big-title {
+    font-size: 2.0em;
+    padding-left: 30px;
+    font-weight: 700;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+section a {
+    text-decoration: none;
+    color: #1779ba;
+}
+
+section a:hover {
+    text-decoration: underline;
+    color: #17b2ba;
+}
+
+.menu i {
+    color: #aaa;
+}
+
+.footer-menu {
+    margin: 0px;
+    padding: 0px;
+}
+
+.footer-p {
+    margin: 0px;
+}

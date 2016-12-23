@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Catalog App</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/foundation.min.css')}}">
+    <link rel="stylesheet"
+	  href="{{url_for('static', filename='vendor/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/app.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi|Roboto+Slab:100,300,400,700" rel="stylesheet">
+    <meta class="foundation-mq">
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="top-bar-left">
+	  <!--<div class="big-title">Bookstore Catalog App</div>-->
+	  <h2 class="heading">Bookstore Catalog App</h2>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <li><a class="button">Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <br>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+      <br/>
+      <div class="row expanded callout secondary footer-menu">
+
+        <div class="small-6 large-3 columns">
+          <p class="lead text-center footer-p">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </p>
+        </div>
+
+        <div class="small-6 large-3 columns">
+          <p class="lead text-center footer-p">
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          </p>
+        </div>
+
+        <div class="small-6 large-3 columns">
+          <p class="lead text-center footer-p">
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          </p>
+        </div>
+
+        <div class="small-6 large-3 columns">
+          <p class="lead text-center footer-p">
+            <i class="fa fa-google-plus-square"
+               aria-hidden="true"></i>
+          </p>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <ul class="menu float-light">
+            <li class="menu-text">
+              <i class="fa fa-copyright" aria-hidden="true"></i>
+              2016-2017 Yoko Harada
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </footer>
+    <script src="{{url_for('static', filename='js/vendor/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendor/foundation.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendor/what-input.js')}}"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

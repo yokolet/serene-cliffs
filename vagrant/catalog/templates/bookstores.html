@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    <main>
+      <div class="row">
+        <div class="callout large-12 column">
+	  <section>
+            <div class="large-2 columns">
+              <div class="section-title">Categories</div>
+              <ul class="menu vertical">
+		<li><a href="{{url_for('showBookstores')}}">All</a></li>
+		{% for category in categories %}
+		<li><a href="{{url_for('showCategory', category_id=category.id)}}">{{category.name}}</a></li>
+		{% endfor %}
+              </ul>
+            </div>
+	  </section>
+	  <section>
+            <div class="large-5 columns">
+              <div class="section-title">Books</div>
+              <ul class="menu vertical">
+		{% for book in books %}
+		<li>
+		  <div class="menu">
+		    <a href="{{url_for('showDescription', category_id=book.category_id, book_id=book.id)}}">{{book.title}}</a> <i>({{book.category.name}})</i>
+		  </div>
+		</li>
+		{% endfor %}
+              </ul>
+            </div>
+	  </section>
+	  <section>
+            <div class="large-5 columns">
+	     {% if book %}
+              <div class="section-title">Description</div>
+	      <ul class="menu vertical">
+		<li>Title: <b>{{book.title}}</b></li>
+		<li>{{book.description}}</li>
+	      </ul>
+	      {% endif %}
+            </div>
+	  </section>
+        </div>
+      </div>
+
+      <section>
+	<div class="row column">
+          <p class="lead">
+	    <div class="section-title">Bookstores</div>
+	  </p>
+	</div>
+	
+	<div class="row small-up-1 medium-up-2 large-up-3">
+	  {% for bookstore in bookstores %}
+          <div class="column">
+            <div class="callout">
+              <p><a href="#">{{bookstore.name}}</a></p>
+            </div>
+          </div>
+	  {% endfor %}
+	</div>
+      </section>
+    </main>
+{% endblock %}

@@ -45,6 +45,20 @@ class Bookstore(Base):
            'name'         : self.name,
            'seller'       : self.seller.email
        }
+
+class Category(Base):
+    __tablename__ = 'category'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'id'           : self.id,
+           'name'         : self.name,
+       }
  
 
 class Book(Base):
@@ -54,7 +68,8 @@ class Book(Base):
     title = Column(String(80), nullable = False)
     description = Column(String(250))
     price = Column(String(8))
-    category = Column(String(250))
+    category_id = Column(Integer,ForeignKey('category.id'))
+    category = relationship(Category)
     bookstore_id = Column(Integer,ForeignKey('bookstore.id'))
     bookstore = relationship(Bookstore)
     seller_id = Column(Integer,ForeignKey('seller.id'))
@@ -68,7 +83,7 @@ class Book(Base):
            'title'        : self.title,
            'description'  : self.description,
            'price'        : self.price,
-           'category'     : self.category,
+           'category'     : self.category.name,
            'bookstore'    : self.bookstore.name,
            'seller'       : self.seller.email
        }

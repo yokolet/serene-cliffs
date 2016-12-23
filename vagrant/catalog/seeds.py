@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database_setup import Base, Bookstore, Book, Seller
+from database_setup import Base, Bookstore, Book, Category, Seller
 
 engine = create_engine('postgresql:///catalog')
 # Bind the engine to the metadata of the Base class so that the
@@ -25,6 +25,20 @@ seller = Seller(name="Yoko", email="yoko@servletgarden.com")
 session.add(seller)
 session.commit()
 
+# Create ctegories
+computer = Category(name="Computer")
+session.add(computer)
+session.commit()
+children = Category(name="Children")
+session.add(children)
+session.commit()
+nonfiction = Category(name="Nonfiction")
+session.add(nonfiction)
+session.commit()
+fiction = Category(name="Fiction")
+session.add(fiction)
+session.commit()
+
 # Books for Unlikely Story Books
 bookstore1 = Bookstore(seller=seller, name="Unlikely Story Books")
 
@@ -35,7 +49,7 @@ book1 = Book(seller=seller,
              title="Python for More Than Dummies",
              description="Everyone can get started fairly easily.",
              price="$14.99",
-             category="Computer",
+             category=computer,
              bookstore=bookstore1)
 
 session.add(book1)
@@ -45,7 +59,7 @@ book2 = Book(seller=seller,
              title="Statistics Explained in Kid's Terms",
              description="Fundamentals of statics are explained with examples.",
              price="$20.00",
-             category="Computer",
+             category=computer,
              bookstore=bookstore1)
 
 session.add(book2)
@@ -55,7 +69,7 @@ book3 = Book(seller=seller,
              title="Spelling Bee Ninja",
              description="How to beat them at spelling bees like a ninja.",
              price="$7.50",
-             category="Children",
+             category=children,
              bookstore=bookstore1)
 
 session.add(book3)
@@ -65,7 +79,7 @@ book4 = Book(seller=seller,
              title="Cooking for Eat Outers",
              description="Extremely easy cooking for normally eat outers.",
              price="$23.49",
-             category="Nonfiction",
+             category=nonfiction,
              bookstore=bookstore1)
 
 session.add(book4)
@@ -75,7 +89,7 @@ book5 = Book(seller=seller,
              title="The Diary of a Web Developer",
              description="A diary of a man who mistakenly became a web developer.",
              price="$15.99",
-             category="Nonfiction",
+             category=nonfiction,
              bookstore=bookstore1)
 
 session.add(book5)
@@ -93,7 +107,7 @@ book1 = Book(seller=seller,
              description="""The night before a new moon, watch your behind.
              Zombies are...""",
              price="$5.99",
-             category="Fiction",
+             category=fiction,
              bookstore=bookstore2)
 
 session.add(book1)
@@ -104,7 +118,7 @@ book2 = Book(seller=seller,
              description="""James found himself in a strange woods filled with
              dense fog. His body was aching all over...""",
              price="$5.99",
-             category="Fiction",
+             category=fiction,
              bookstore=bookstore2)
 
 session.add(book2)
@@ -115,7 +129,7 @@ book3 = Book(seller=seller,
              description="""A little Emily loved to play with a bug living in
              her laptop. One day, the bug the Goo told her...""",
              price="$5.99",
-             category="Children",
+             category=children,
              bookstore=bookstore2)
 
 session.add(book3)
@@ -127,7 +141,7 @@ book4 = Book(seller=seller,
              and time using Anywhere Door, which was a dusty family treasure
              saved in a half broken shed...""",
              price="$5.99",
-             category="Fiction",
+             category=fiction,
              bookstore=bookstore2)
 
 session.add(book4)
