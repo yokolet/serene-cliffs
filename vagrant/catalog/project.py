@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Seller, Bookstore, Category, Book
+from database_setup import Base, User, Category, Book
 
 #  Creates flask app
 app = Flask(__name__)
@@ -12,29 +12,33 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-@app.route('/bookstores/JSON')
-def bookstoresJSON():
-    bookstores = session.query(Bookstore).all()
-    return jsonify(booksotre=[b.serialize for b in bookstores])
+@app.route('/book_catalog/books/JSON')
+def bookCatalogJSON():
+    book_titles = session.query(Book).all()
+    return jsonify(booksotre=[b.serialize for b in book_titles])
+
+@app.route('/book_catalog/categories/JSON')
+def categoryJSON():
+    book_titles = session.query(Category).all()
+    return jsonify(booksotre=[b.serialize for b in book_titles])
 
 
-@app.route('/bookstores/<int:bookstore_id>/books/JSON')
-def bookstoreBookJSON(bookstore_id):
-    bookstore= session.query(Bookstore).filter_by(id=bookstore_id).one()
-    books = session.query(Book).filter_by(bookstore_id=bookstore_id).all()
+@app.route('/book_catalog/categories/<int:category_id>/books/JSON')
+def categoryBookJSON(category_id):
+    category= session.query(Category).filter_by(id=category_id).one()
+    books = session.query(Book).filter_by(category_id=category_id).all()
     return jsonify(books=[b.serialize for b in books])
 
 
-@app.route('/bookstores/<int:bookstore_id>/books/<int:book_id>/JSON')
-def booksJSON(bookstore_id, book_id):
+@app.route('/book_catalog/books/<int:book_id>/JSON')
+def bookJSON(book_id):
     book = session.query(Book).filter_by(id=book_id).one()
     return jsonify(book=book.serialize)
 
 
 @app.route('/')
-@app.route('/bookstores')
-def showBookstores():
-    bookstores = session.query(Bookstore).all()
+@app.route('/book_catalog')
+def showBookTitles():
     categories = session.query(Category).all()
     books = session.query(Book).all()
     return render_template('bookstores.html',
