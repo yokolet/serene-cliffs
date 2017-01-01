@@ -7,11 +7,11 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
-class Seller(Base):
-    """Seller model definition.
-    A seller has a bookstore and books.
+class User(Base):
+    """User model definition.
+    A user has an id, name, email and optional picture url.
     """
-    __tablename__ = 'seller'
+    __tablename__ = 'user'
    
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
@@ -29,28 +29,16 @@ class Seller(Base):
        }
 
 
-class Bookstore(Base):
-    __tablename__ = 'bookstore'
-   
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    seller_id = Column(Integer,ForeignKey('seller.id'))
-    seller = relationship(Seller)
-
-    @property
-    def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-           'id'           : self.id,
-           'name'         : self.name,
-           'seller'       : self.seller.email
-       }
-
 class Category(Base):
+    """Category model definition
+    A category has an id and name.
+    """
     __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    user_id = Column(Integer,ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -58,6 +46,7 @@ class Category(Base):
        return {
            'id'           : self.id,
            'name'         : self.name,
+           'user'         : self.user.email
        }
  
 
@@ -66,14 +55,13 @@ class Book(Base):
 
     id = Column(Integer, primary_key = True)
     title = Column(String(80), nullable = False)
+    author = Column(String(250))
     description = Column(String(250))
     price = Column(String(8))
     category_id = Column(Integer,ForeignKey('category.id'))
     category = relationship(Category)
-    bookstore_id = Column(Integer,ForeignKey('bookstore.id'))
-    bookstore = relationship(Bookstore)
-    seller_id = Column(Integer,ForeignKey('seller.id'))
-    seller = relationship(Seller)
+    user_id = Column(Integer,ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -81,11 +69,11 @@ class Book(Base):
        return {
            'id'           : self.id,
            'title'        : self.title,
+           'author'       : self.author,
            'description'  : self.description,
            'price'        : self.price,
            'category'     : self.category.name,
-           'bookstore'    : self.bookstore.name,
-           'seller'       : self.seller.email
+           'user'         : self.user.email
        }
 
 
