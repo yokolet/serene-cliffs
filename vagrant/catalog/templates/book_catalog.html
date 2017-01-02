@@ -4,26 +4,30 @@
       <div class="row">
         <div class="callout large-12 column">
 	  <section>
-            <div class="large-2 columns">
+            <div class="large-3 columns">
               <div class="section-title">Categories</div>
               <ul class="menu vertical">
-		<li><a href="{{url_for('showCategoriesBooks')}}">All</a></li>
+		<li>
+                  <a href="{{url_for('showCategoriesBooks')}}">All</a>
+                </li>
 		{% for category in categories %}
-		<li><a href="{{url_for('showBooksCategory', category_id=category.id)}}">{{category.name}}</a></li>
+		<li>
+                  <a href="{{url_for('showBooksCategory', category_id=category.id)}}">
+                    {{category.name}}
+                  </a>
+                </li>
 		{% endfor %}
               </ul>
             </div>
 	  </section>
 	  <section>
-            <div class="large-5 columns">
+            <div class="large-9 columns">
               <div class="section-title">Books</div>
               <ul class="menu vertical">
 		{% for book in books %}
 		<li>
 		  <div class="menu">
-		    <a href="{{url_for('showBookDescription',
-                             category_id=book.category_id,
-                             book_id=book.id)}}">
+		    <a href="{{url_for('showBookDescription', book_id=book.id)}}">
                       {{book.title}}</a>
                     <i>({{book.category.name}})</i>
 		  </div>
@@ -32,19 +36,7 @@
               </ul>
             </div>
 	  </section>
-	  <section>
-            <div class="large-5 columns">
-	     {% if book %}
-              <div class="section-title">Description</div>
-	      <ul class="menu vertical">
-		<li>Title: <b>{{book.title}}</b></li>
-		<li>{{book.description}}</li>
-	      </ul>
-	      {% endif %}
-            </div>
-	  </section>
         </div>
       </div>
-
     </main>
 {% endblock %}

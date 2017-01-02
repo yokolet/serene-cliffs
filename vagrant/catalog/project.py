@@ -59,18 +59,12 @@ def showBooksCategory(category_id):
                            categories=categories,
                            books=books)
 
-@app.route('/book_catalog/categories/<int:category_id>/books/<int:book_id>')
-def showBookDescription(category_id, book_id):
+@app.route('/book_catalog/books/<int:book_id>')
+def showBookDescription(book_id):
     """Renders a description of specified book id"""
-    categories = session.query(Category).all()
-    if category_id:
-        books = session.query(Book).filter_by(category_id=category_id)
-    else:
-        books = session.query(Book).all()
-    book = filter(lambda b: b.id == book_id, books)[0]
+    book = session.query(Book).filter_by(id=book_id).one()
+    print(book.title)
     return render_template('book_description.html',
-                           categories=categories,
-                           books=books,
                            book=book)
 
 

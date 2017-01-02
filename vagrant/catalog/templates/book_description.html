@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <main>
+      <div class="row">
+        <div class="callout large-12 column">
+	  <section>
+            <div class="large-12 columns">
+              <div class="section-title">Description</div>
+	      <ul class="menu vertical">
+		<li>Title: <b>{{book.title}}</b></li>
+                <li>
+                  Author:
+                  {% if book.author %}
+                  <b>{{book.author}}</b>
+                  {% endif %}
+                </li>
+                <li>Category: <b>{{book.category.name}}</b></li>
+		<li>{{book.description}}</li>
+	      </ul>
+            </div>
+	  </section>
+        </div>
+      </div>
+    </main>
+{% endblock %}
