@@ -7,9 +7,9 @@
             <div class="large-2 columns">
               <div class="section-title">Categories</div>
               <ul class="menu vertical">
-		<li><a href="{{url_for('showBookstores')}}">All</a></li>
+		<li><a href="{{url_for('showCategoriesBooks')}}">All</a></li>
 		{% for category in categories %}
-		<li><a href="{{url_for('showCategory', category_id=category.id)}}">{{category.name}}</a></li>
+		<li><a href="{{url_for('showBooksCategory', category_id=category.id)}}">{{category.name}}</a></li>
 		{% endfor %}
               </ul>
             </div>
@@ -21,7 +21,11 @@
 		{% for book in books %}
 		<li>
 		  <div class="menu">
-		    <a href="{{url_for('showDescription', category_id=book.category_id, book_id=book.id)}}">{{book.title}}</a> <i>({{book.category.name}})</i>
+		    <a href="{{url_for('showBookDescription',
+                             category_id=book.category_id,
+                             book_id=book.id)}}">
+                      {{book.title}}</a>
+                    <i>({{book.category.name}})</i>
 		  </div>
 		</li>
 		{% endfor %}
@@ -42,22 +46,5 @@
         </div>
       </div>
 
-      <section>
-	<div class="row column">
-          <p class="lead">
-	    <div class="section-title">Bookstores</div>
-	  </p>
-	</div>
-	
-	<div class="row small-up-1 medium-up-2 large-up-3">
-	  {% for bookstore in bookstores %}
-          <div class="column">
-            <div class="callout">
-              <p><a href="#">{{bookstore.name}}</a></p>
-            </div>
-          </div>
-	  {% endfor %}
-	</div>
-      </section>
     </main>
 {% endblock %}
