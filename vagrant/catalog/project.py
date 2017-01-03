@@ -1,7 +1,16 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+import httplib2
+import json
+import random
+import requests
+import string
+from database_setup import Base, User, Category, Book
+from flask import Flask, jsonify, make_response, redirect, render_template, request, url_for
+from flask import session as login_session
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, User, Category, Book
+
 
 #  Creates flask app
 app = Flask(__name__)
@@ -17,6 +26,7 @@ def bookCatalogJSON():
     """Returns all books in JSON format"""
     books = session.query(Book).all()
     return jsonify(books=[b.serialize for b in books])
+
 
 @app.route('/book_catalog/categories/JSON')
 def categoryJSON():
@@ -51,6 +61,7 @@ def showCategoriesBooks():
                            category_name='New',
                            books=books)
 
+
 @app.route('/book_catalog/categories/<int:category_id>/books')
 def showBooksCategory(category_id):
     """Renders all books of a specified category id"""
@@ -63,12 +74,14 @@ def showBooksCategory(category_id):
                            number_of_books=books.count(),
                            books=books)
 
+
 @app.route('/book_catalog/books/<int:book_id>')
 def showBookDescription(book_id):
     """Renders a description of specified book id"""
     book = session.query(Book).filter_by(id=book_id).one()
     return render_template('book_description.html',
                            book=book)
+
 
 def bookData(request):
     """Utilily function to get form data to create a dict.
@@ -85,11 +98,13 @@ def bookData(request):
         data['error'] = 'Title should not be empty.'
     return data
 
+
 def bookDataCorrected(data):
     if not data['author']: data['author']=''
     if not data['price']: data['price']='$ 0.00'
     if not data['description']: data['description']=''
     return data
+
 
 def getBookInstance(data):
     book = Book(title=data['title'])
@@ -98,6 +113,7 @@ def getBookInstance(data):
     if data['price']: book.price = data['price']
     if data['description']: book.description = data['description']
     return book
+
 
 @app.route('/book_catalog/books/new', methods=['GET', 'POST'])
 def newBook():
@@ -130,6 +146,7 @@ def newBook():
                                button='Create',
                                categories=categories,
                                data=data)
+
 
 @app.route('/book_catalog/books/<int:book_id>/edit', methods=['GET', 'POST'])
 def editBook(book_id):
@@ -164,6 +181,7 @@ def editBook(book_id):
                                button='Update',
                                categories=categories,
                                data=data)
+
 
 @app.route('/book_catalog/books/<int:book_id>/delete', methods=['GET', 'POST'])
 def deleteBook(book_id):

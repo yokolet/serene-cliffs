@@ -14,11 +14,13 @@ body {
     font-size: 2.0em;
     padding-left: 30px;
     font-weight: 700;
+    color: rgba(12, 61, 93, 0.71);
 }
 
 .section-title {
     font-size: 1.5em;
     font-weight: 700;
+    color: #888888;
 }
 
 section a {
@@ -32,7 +34,7 @@ section a:hover {
 }
 
 .menu i {
-    color: #aaa;
+    color: #77998b;
 }
 
 .footer-menu {
@@ -42,6 +44,7 @@ section a:hover {
 
 .footer-p {
     margin: 0px;
+    color: #77998b;
 }
 
 .error,
