@@ -11,7 +11,7 @@ class User(Base):
     """User model definition.
     A user has an id, name, email and optional picture url.
     """
-    __tablename__ = 'user'
+    __tablename__ = 'book_user'
    
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
@@ -37,7 +37,7 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    user_id = Column(Integer,ForeignKey('user.id'))
+    user_id = Column(Integer,ForeignKey('book_user.id'))
     user = relationship(User)
 
     @property
@@ -46,7 +46,7 @@ class Category(Base):
        return {
            'id'           : self.id,
            'name'         : self.name,
-           'user'         : self.user.email
+           'user'         : self.book_user.email
        }
  
 
@@ -60,7 +60,7 @@ class Book(Base):
     price = Column(String(8))
     category_id = Column(Integer,ForeignKey('category.id'))
     category = relationship(Category)
-    user_id = Column(Integer,ForeignKey('user.id'))
+    user_id = Column(Integer,ForeignKey('book_user.id'))
     user = relationship(User)
 
     @property
@@ -73,7 +73,7 @@ class Book(Base):
            'description'  : self.description,
            'price'        : self.price,
            'category'     : self.category.name,
-           'user'         : self.user.email
+           'user'         : self.book_user.email
        }
 
 
