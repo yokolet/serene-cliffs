@@ -19,4 +19,4 @@ The Item Catalog code is in `/vagrant/catalog` directory.
 
 
 For further information about the app,
-see [README in catalog](catalog/README.md).
+see [README in catalog](vagrant/catalog/README.md).
