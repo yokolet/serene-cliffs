@@ -47,9 +47,17 @@ section a:hover {
     color: #77998b;
 }
 
+.alert-box {
+    margin-top: 1.5rem;
+}
+
 .error,
 .alert {
     color: #f04124;
+}
+
+.message {
+    color: rgb(28, 119, 108)
 }
 
 .price {

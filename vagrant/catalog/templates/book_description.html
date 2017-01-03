@@ -22,13 +22,15 @@
               {{book.description}}
               {% endif %}
             </li>
+            <hr />
 	  </ul>
         </div>
+        {% if book.user.name == logged_in %}
         <div class="large-12 columns">
-          <hr />
           <a class="button info" href="{{url_for('editBook', book_id=book.id)}}">Edit</a>
           <a class="button alert" href="{{url_for('deleteBook', book_id=book.id)}}">Delete</a>
         </div>
+        {% endif %}
       </div>
     </div>
   </section>

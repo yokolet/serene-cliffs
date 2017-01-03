@@ -3,6 +3,20 @@
     <main>
       <div class="row">
         <div class="callout large-12 column">
+          <section>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="small callout success" data-closable>
+              {% for message in messages %}
+              <div class="small message">{{message}}</div>
+              {% endfor %}
+              <button class="small close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+            {% endwith %}
+          </section>
 	  <section>
             <div class="large-3 columns">
               <div class="section-title">Categories</div>
@@ -22,7 +36,10 @@
 	  </section>
 	  <section>
             <div class="large-7 columns">
-              <a class="button small secondary" href="{{url_for('newBook')}}">Add Book</a>
+              {% if logged_in %}
+              <a class="button small secondary"
+                 href="{{url_for('newBook')}}">Add Book</a>
+              {% endif %}
               <div class="section-title">
                 {{category_name}} Books
                 {% if number_of_books %}
