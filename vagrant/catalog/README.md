@@ -36,3 +36,39 @@ If the app starts, open `http://localhost:5000/` on the browser.
 This app uses Facebook OAuth for a user login. To use app's
 create/edit/delete feature, be ready to use the Facebook account.
 
+
+## API endpoints
+
+This app supports four types of API endpoints by JSON.
+
+1. shows all books
+
+    example
+
+    ```
+    http://localhost:5000/book_catalog/books/JSON
+    ```
+
+2. shows all categories
+
+    example
+
+    ```
+    http://localhost:5000/book_catalog/categories/JSON
+    ```
+
+3. shows all books of a specified category id
+
+    example
+
+    ```
+    http://localhost:5000/book_catalog/categories/1/books/JSON
+    ```
+
+4. shows a book of a specified book id
+
+    example
+
+    ```
+    http://localhost:5000/book_catalog/books/1/JSON
+    ```
