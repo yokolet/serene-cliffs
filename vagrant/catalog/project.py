@@ -53,6 +53,7 @@ def bookJSON(book_id):
 
 @app.route('/login')
 def showLogin():
+    """Renders login page"""
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
@@ -61,6 +62,8 @@ def showLogin():
 
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
+    """Connects to Facebook for login.
+    After logging in, the catalog page will show up."""
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -81,7 +84,6 @@ def fbconnect():
     userinfo_url = "https://graph.facebook.com/v2.4/me"
     # strip expire tag from access token
     token = result.split("&")[0]
-
 
     url = 'https://graph.facebook.com/v2.4/me?%s&fields=name,id,email' % token
     h = httplib2.Http()
@@ -127,6 +129,7 @@ def fbconnect():
 
 @app.route('/fbdisconnect')
 def fbdisconnect():
+    """Disconnect a user from Facebook"""
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
@@ -138,9 +141,8 @@ def fbdisconnect():
 
 
 # User Helper Functions
-
-
 def createUser(login_session):
+    """Helper function to create a user"""
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
     session.add(newUser)
@@ -150,11 +152,13 @@ def createUser(login_session):
 
 
 def getUserInfo(user_id):
+    """Helper function to find a user by user_id"""
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
 def getUserID(email):
+    """Helper function to get a user by email"""
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
@@ -165,11 +169,8 @@ def getUserID(email):
 # Disconnect based on provider
 @app.route('/disconnect')
 def disconnect():
+    """Logout a user"""
     if 'provider' in login_session:
-        if login_session['provider'] == 'google':
-            gdisconnect()
-            del login_session['gplus_id']
-            del login_session['credentials']
         if login_session['provider'] == 'facebook':
             fbdisconnect()
             del login_session['facebook_id']
@@ -225,7 +226,7 @@ def showBookDescription(book_id):
 
 
 def bookData(request):
-    """Utilily function to get form data to create a dict.
+    """Helper function to get form data to create a dict.
     If title is not given, adds an error to the dict.
     """
     if request.form.get('category'):
@@ -246,6 +247,7 @@ def bookData(request):
 
 
 def bookDataCorrected(data):
+    """Helper function to create a data to render."""
     if not data['author']: data['author']=''
     if not data['price']: data['price']='$ 0.00'
     if not data['description']: data['description']=''
@@ -253,6 +255,7 @@ def bookDataCorrected(data):
 
 
 def getBookInstance(data):
+    """Helper function to create a book instance."""
     book = Book(title=data['title'])
     if data['author']: book.author = data['author']
     if data['category']: book.category = data['category']
