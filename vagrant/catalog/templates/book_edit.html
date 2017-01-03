@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+  <section>
+    <div class="row">
+      <div class="callout large-12 columns">
+        <div class="section-title">{{title}}</div>
+      </div>
+    </div>
+      <form method="POST">
+        <div class="row">
+          <div class="large-6 column">
+            <label>Title
+              <input type="text" name="title" value="{{data['title']}}"/>
+            </label>
+            </div>
+          {% if data['error'] %}
+          <div class="large-6 column error">
+            {{data['error']}}
+          </div>
+          {% endif %}
+        </div>
+        <div class="row">
+          <div class="large-10 columns">
+            <label>Author (Optional)
+	      <input type="text" name="author" value="{{data['author']}}"/>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-3 columns">
+            <label>Category
+                  <select>
+                    <option></option>
+                    {% for category in categories %}
+	            <option name="category" value="{{category.name}}"
+                            {% if data['category'] == category.name %}
+                            selected
+                            {% endif %}>
+                      {{category.name}}
+                    </option>
+                    {% endfor %}
+                  </select>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-3 columns">
+            <label>Price (Optional)
+	      <input type="text" name="price"
+	             value="{{data['price']}}" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-10 columns">
+            <label>Description (Optional)
+	      <textarea name="description">{{data['description']}}</textarea>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-2 columns">
+            <input class="small button" type="submit" value="{{button}}" />
+          </div>
+        </div>
+      </form>
+  </section>
+</main>
+{% endblock %}

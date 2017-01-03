@@ -43,3 +43,12 @@ section a:hover {
 .footer-p {
     margin: 0px;
 }
+
+.error,
+.alert {
+    color: #f04124;
+}
+
+.price {
+    width: 30%;
+}

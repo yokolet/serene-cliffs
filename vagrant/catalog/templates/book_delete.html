@@ -5,7 +5,9 @@
     <div class="row">
       <div class="callout large-12 column">
         <div class="large-12 columns">
-          <div class="section-title">Description</div>
+          <div class="section-title alert">
+            Are you sure to delete this book?
+          </div>
 	  <ul class="menu vertical">
 	    <li>Title: <b>{{book.title}}</b></li>
             <li>
@@ -25,8 +27,13 @@
         </div>
         <div class="large-12 columns">
           <hr />
-          <a class="button info" href="{{url_for('editBook', book_id=book.id)}}">Edit</a>
-          <a class="button alert" href="{{url_for('deleteBook', book_id=book.id)}}">Delete</a>
+          <form method="POST">
+            <a class="button secondary"
+               href="{{url_for('showBookDescription', book_id=book.id)}}">
+              Cancel
+            </a>
+            <input class="button alert" type="submit" value="Yes" />
+          </form>
         </div>
       </div>
     </div>

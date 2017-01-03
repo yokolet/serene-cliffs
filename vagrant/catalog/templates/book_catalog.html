@@ -21,8 +21,11 @@
             </div>
 	  </section>
 	  <section>
-            <div class="large-9 columns">
-              <div class="section-title">Books</div>
+            <div class="large-7 columns">
+              <div class="section-title">
+                {{category_name}} Books
+                {% if number_of_books %}({{number_of_books}} books){% endif %}
+              </div>
               <ul class="menu vertical">
 		{% for book in books %}
 		<li>
@@ -36,6 +39,11 @@
               </ul>
             </div>
 	  </section>
+          <section>
+            <div class="large-2 columns">
+              <a class="button.small" href="{{url_for('newBook')}}">Add Book</a>
+            </div>
+          </section>
         </div>
       </div>
     </main>
