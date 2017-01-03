@@ -46,7 +46,7 @@ class Category(Base):
        return {
            'id'           : self.id,
            'name'         : self.name,
-           'user'         : self.book_user.email
+           'user'         : self.user.email
        }
  
 
@@ -69,11 +69,11 @@ class Book(Base):
        return {
            'id'           : self.id,
            'title'        : self.title,
-           'author'       : self.author,
-           'description'  : self.description,
-           'price'        : self.price,
-           'category'     : self.category.name,
-           'user'         : self.book_user.email
+           'author'       : self.author if self.author else '',
+           'description'  : self.description if self.description else '',
+           'price'        : self.price if self.price else '$ 0.00',
+           'category'     : self.category.name if self.category else '',
+           'user'         : self.user.email
        }
 
 
