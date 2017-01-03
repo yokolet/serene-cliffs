@@ -31,9 +31,10 @@
           <form method="POST">
             <a class="button secondary"
                href="{{url_for('showBookDescription', book_id=book.id)}}">
-              Cancel
+              <i class="fa fa-ban" aria-hidden="true"></i> Cancel
             </a>
-            <input class="button alert" type="submit" value="Yes" />
+            <input class="button alert" type="submit"
+                   value="Yes" />
           </form>
         </div>
       </div>

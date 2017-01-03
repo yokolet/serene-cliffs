@@ -27,8 +27,14 @@
         </div>
         {% if book.user.name == logged_in %}
         <div class="large-12 columns">
-          <a class="button info" href="{{url_for('editBook', book_id=book.id)}}">Edit</a>
-          <a class="button alert" href="{{url_for('deleteBook', book_id=book.id)}}">Delete</a>
+          <a class="button info"
+             href="{{url_for('editBook', book_id=book.id)}}">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+          </a>
+          <a class="button alert"
+             href="{{url_for('deleteBook', book_id=book.id)}}">
+            <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+          </a>
         </div>
         {% endif %}
       </div>

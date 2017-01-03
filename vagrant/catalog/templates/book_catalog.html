@@ -37,8 +37,9 @@
 	  <section>
             <div class="large-7 columns">
               {% if logged_in %}
-              <a class="button small secondary"
-                 href="{{url_for('newBook')}}">Add Book</a>
+              <a class="button small secondary" href="{{url_for('newBook')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Book
+              </a>
               {% endif %}
               <div class="section-title">
                 {{category_name}} Books

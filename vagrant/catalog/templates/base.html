@@ -25,15 +25,15 @@
         </div>
         {% if not on_login %}
         <div class="top-bar-right">
-          <ul class="menu">
-            {% if logged_in %}
-            <li><a class="button"
-                   href="{{url_for('disconnect')}}">Logout</a></li>
-            {% else %}
-            <li><a class="button"
-                   href="{{url_for('showLogin')}}">Login</a></li>
-            {% endif %}
-          </ul>
+          {% if logged_in %}
+          <a class="button" href="{{url_for('disconnect')}}">
+            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+          </a>
+          {% else %}
+          <a class="button" href="{{url_for('showLogin')}}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+          </a>
+          {% endif %}
         </div>
         {% endif %}
       </div>
