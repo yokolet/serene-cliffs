@@ -1,0 +1,117 @@
+{
+    "user": [
+        {
+            "name": "Yoko",
+            "email": "yoko@servletgarden.com"
+        }
+    ],
+    "category": [
+        {
+            "name": "Computer",
+            "user": "Yoko"
+        },
+        {
+            "name": "Children",
+            "user": "Yoko"
+        },
+        {
+            "name": "Nonfiction",
+            "user": "Yoko"
+        },
+        {
+            "name": "Fiction",
+            "user": "Yoko"
+        }
+    ],
+    "book": [
+        {
+            "title": "Python for More Than Dummies",
+            "author": "African Great Pythonians",
+            "description": ["Everyone can get started fairly easily."],
+            "price": "$14.99",
+            "category":"Computer",
+            "user": "Yoko"
+        },
+        {
+            "title": "Statistics Explained in Kid's Terms",
+            "author": "World Statistics Education Team",
+            "description": ["Fundamentals of statics are explained by the words",
+                            "even kids can understand."],
+            "price": "$20.00",
+            "category":"Computer",
+            "user": "Yoko"
+        },
+        {
+            "title": "Spelling Bee Ninja",
+            "description": ["How to beat them at spelling bees like a ninja."],
+            "price": "$7.50",
+            "category":"Children",
+            "user": "Yoko"
+        },
+        {
+            "title": "Cooking for Eat Outers",
+            "author": "Julia Doe",
+            "description": ["Extremely easy cooking for normally eat outers."],
+            "price": "$23.49",
+            "category":"Nonfiction",
+            "user": "Yoko"
+        },
+        {
+            "title": "The Diary of a Web Developer",
+            "author": "Anonymous",
+            "description": ["A diary of a man who accidentally became a web",
+                            "developer. One day, he encountered a very weird",
+                            "guest subscribed at his app..."],
+            "price": "$15.99",
+            "category":"Nonfiction",
+            "user": "Yoko"
+        },
+        {
+            "title": "Trotting Zombies",
+            "author": "Holy Johnson",
+            "description": ["The night before a new moon, watch your behind.",
+                            "Zombies are..."],
+            "price": "$5.99",
+            "category":"Fiction",
+            "user": "Yoko"
+        },
+        {
+            "title": "James Smith and the Woods of Secrets",
+            "author": "K. L., Rounding",
+            "description": ["James found himself in strange woods filled with",
+                            "dense fog lying on his back. His body was aching",
+                            "all over..."],
+            "price": "$5.99",
+            "category":"Fiction",
+            "user": "Yoko"
+        },
+        {
+            "title": "A Bug Lived in Emily's Laptop",
+            "author": "Star Skyler",
+            "description": ["A little Emily loved to play with a bug living in",
+                            "her laptop. One day, the bug the Goo told her..."],
+            "price": "$6.49",
+            "category":"Children",
+            "user": "Yoko"
+        },
+        {
+            "title": "Master Whoknows",
+            "description": ["Kung Fu master, Whoknows, decided to travel space",
+                            "and time using Anywhere Door, which was a dusty",
+                            "family treasure saved in a half broken shed..."],
+            "price": "$5.00",
+            "category":"Fiction",
+            "user": "Yoko"
+        },
+        {
+            "title": "X-Devs: Webpocalypse",
+            "author": "Samuel King",
+            "description": ["A web app turned to a powerful mutant in an",
+                            "abandoned town of forgotten computer. Brave devs",
+                            "stood up to fight against, but..."],
+            "price": "$1.99",
+            "category":"Fiction",
+            "user": "Yoko"
+        }
+    ]
+}

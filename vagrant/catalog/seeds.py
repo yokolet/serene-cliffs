@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from database_setup import Base, Book, Category, User
+import json
 
 engine = create_engine('postgresql:///catalog')
 # Bind the engine to the metadata of the Base class so that the
@@ -18,117 +19,35 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
+# Load seed data from JSON file
+with open('seed_data.json') as data_file:
+    seed_data = json.load(data_file)
 
 # Create dummy user
-user = User(name='Yoko', email='yoko@servletgarden.com')
-                 
+user_data = seed_data['user'][0]
+user = User(name=user_data['name'], email=user_data['email'])
 session.add(user)
 session.commit()
 
 # Create ctegories
-computer = Category(name='Computer', user=user)
-session.add(computer)
-session.commit()
-children = Category(name='Children', user=user)
-session.add(children)
-session.commit()
-nonfiction = Category(name='Nonfiction', user=user)
-session.add(nonfiction)
-session.commit()
-fiction = Category(name='Fiction', user=user)
-session.add(fiction)
+categories = {}
+for cat_data in seed_data['category']:
+    name = cat_data['name']
+    c = Category(name=name, user=user)
+    categories[name]=c
+    session.add(c)
+
 session.commit()
 
-book1 = Book(user=user,
-             title='Python for More Than Dummies',
-             author='African Great Pythonians',
-             description='Everyone can get started fairly easily.',
-             price='$14.99',
-             category=computer)
+# Create books
+for book_data in seed_data['book']:
+    description = ' '.join(book_data['description'])
+    b = Book(user=user,
+             title=book_data['title'],
+             author=book_data['author'] if 'author' in book_data else None,
+             description=description,
+             price=book_data['price'] if 'price' in book_data else None,
+             category=categories[book_data['category']])
+    session.add(b)
 
-session.add(book1)
-session.commit()
-
-book2 = Book(user=user,
-             title="Statistics Explained in Kid's Terms",
-             author='World Statistics Education Team',
-             description="""Fundamentals of statics are explained by the words
-             even kids can understand.""",
-             price='$20.00',
-             category=computer)
-
-session.add(book2)
-session.commit()
-
-book3 = Book(user=user,
-             title='Spelling Bee Ninja',
-             description='How to beat them at spelling bees like a ninja.',
-             price='$7.50',
-             category=children)
-
-session.add(book3)
-session.commit()
-
-book4 = Book(user=user,
-             title='Cooking for Eat Outers',
-             author='Julia Doe',
-             description='Extremely easy cooking for normally eat outers.',
-             price='$23.49',
-             category=nonfiction)
-
-session.add(book4)
-session.commit()
-
-book5 = Book(user=user,
-             title='The Diary of a Web Developer',
-             author='anonymous',
-             description='A diary of a man who mistakenly became a web developer.',
-             price='$15.99',
-             category=nonfiction)
-
-session.add(book5)
-session.commit()
-
-book1 = Book(user=user,
-             title='Trotting Zombies',
-             author='Holy Johnson',
-             description="""The night before a new moon, watch your behind.
-             Zombies are...""",
-             price='$5.99',
-             category=fiction)
-
-session.add(book1)
-session.commit()
-
-book2 = Book(user=user,
-             title='James Smith and the Woods of Secrets',
-             author='K. L., Rounding',
-             description="""James found himself in strange woods filled with
-             dense fog lying on his back. His body was aching all over...""",
-             price='$5.99',
-             category=fiction)
-
-session.add(book2)
-session.commit()
-
-book3 = Book(user=user,
-             title="A Bug Lived in Emily's Laptop",
-             author='Star Skyler',
-             description="""A little Emily loved to play with a bug living in
-             her laptop. One day, the bug the Goo told her...""",
-             price='$5.99',
-             category=children)
-
-session.add(book3)
-session.commit()
-
-book4 = Book(user=user,
-             title='Master Whoknows',
-             description="""Kung Fu master, Whoknows, decided to travel space
-             and time using Anywhere Door, which was a dusty family treasure
-             saved in a half broken shed...""",
-             price='$5.99',
-             category=fiction)
-
-session.add(book4)
 session.commit()
