@@ -39,7 +39,9 @@ class Book(Base):
     author = Column(String(250))
     description = Column(String(250))
     price = Column(String(8))
-    category_id = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
+    category_id = Column(Integer,
+                         ForeignKey('category.id', ondelete='SET NULL'),
+                         nullable=True)
     category = relationship(Category, backref='book', passive_deletes=True)
     user_id = Column(Integer, ForeignKey('book_user.id', ondelete='CASCADE'))
     user = relationship(User, backref='book', passive_deletes=True)
