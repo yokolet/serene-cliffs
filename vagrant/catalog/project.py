@@ -25,8 +25,12 @@ session = DBSession()
 
 apimanager = APIManager(app, session=session)
 
-apimanager.create_api(User, methods=['GET'])
-apimanager.create_api(Category, methods=['GET'])
+apimanager.create_api(User,
+                      methods=['GET'],
+                      include_columns=['id', 'name', 'email', 'picture'])
+apimanager.create_api(Category,
+                      methods=['GET'],
+                      include_columns=['id', 'name'])
 apimanager.create_api(Book, methods=['GET'])
 
 
