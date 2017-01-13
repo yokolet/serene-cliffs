@@ -18,16 +18,6 @@ class User(Base):
     email = Column(String(250), nullable=False)
     picture = Column(String(250))
 
-    @property
-    def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-           'id'           : self.id,
-           'name'         : self.name,
-           'email'        : self.email,
-           'picture'      : self.picture,
-       }
-
 
 class Category(Base):
     """Category model definition
@@ -37,18 +27,9 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    user_id = Column(Integer,ForeignKey('book_user.id'))
-    user = relationship(User)
+    user_id = Column(Integer, ForeignKey('book_user.id', ondelete='CASCADE'))
+    user = relationship(User, backref='category', passive_deletes=True)
 
-    @property
-    def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-           'id'           : self.id,
-           'name'         : self.name,
-           'user'         : self.user.email
-       }
- 
 
 class Book(Base):
     __tablename__ = 'book'
@@ -58,23 +39,10 @@ class Book(Base):
     author = Column(String(250))
     description = Column(String(250))
     price = Column(String(8))
-    category_id = Column(Integer,ForeignKey('category.id'))
-    category = relationship(Category)
-    user_id = Column(Integer,ForeignKey('book_user.id'))
-    user = relationship(User)
-
-    @property
-    def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-           'id'           : self.id,
-           'title'        : self.title,
-           'author'       : self.author if self.author else '',
-           'description'  : self.description if self.description else '',
-           'price'        : self.price if self.price else '$ 0.00',
-           'category'     : self.category.name if self.category else '',
-           'user'         : self.user.email
-       }
+    category_id = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
+    category = relationship(Category, backref='book', passive_deletes=True)
+    user_id = Column(Integer, ForeignKey('book_user.id', ondelete='CASCADE'))
+    user = relationship(User, backref='book', passive_deletes=True)
 
 
 engine = create_engine('postgresql:///catalog')

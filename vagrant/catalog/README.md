@@ -14,6 +14,15 @@ $ psql
 vagrant=> create database catalog;
 ```
 
+The app uses [Flask-Restless](https://flask-restless.readthedocs.io/en/stable/index.html)
+to provide JSON endpoint. The module is not installed by default.
+Install the module before runs the app.
+
+```
+sudo pip install Flask-Restless
+```
+
+
 Then create schema and transact seed data.
 
 ```
@@ -40,35 +49,32 @@ create/edit/delete feature, be ready to use the Facebook account.
 ## API endpoints
 
 This app supports four types of API endpoints by JSON.
+JSON enpoints support HTTP GET method only.
 
-1. shows all books
+1. shows all books, categories or users
+
+    ```
+    http://localhost:5000/api/book
+    http://localhost:5000/api/category
+    http://localhost:5000/api/book_user
+    ```
+
+2. shows one book, cateogory or user
+
+    example:
+
+    ```
+    http://localhost:5000/api/book/1
+    http://localhost:5000/api/category/1
+    http://localhost:5000/api/book_user/1
+    ```
+
+3. shows associated records
 
     example
 
     ```
-    http://localhost:5000/book_catalog/books/JSON
+    http://localhost:5000/api/cagetory/1/user
+    http://localhost:5000/api/book/1/category
     ```
 
-2. shows all categories
-
-    example
-
-    ```
-    http://localhost:5000/book_catalog/categories/JSON
-    ```
-
-3. shows all books of a specified category id
-
-    example
-
-    ```
-    http://localhost:5000/book_catalog/categories/1/books/JSON
-    ```
-
-4. shows a book of a specified book id
-
-    example
-
-    ```
-    http://localhost:5000/book_catalog/books/1/JSON
-    ```

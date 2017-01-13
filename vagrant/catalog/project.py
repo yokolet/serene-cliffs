@@ -7,6 +7,7 @@ from database_setup import Base, User, Category, Book
 from flask import Flask, flash, jsonify, make_response
 from flask import redirect, render_template, request, url_for
 from flask import session as login_session
+from flask_restless import APIManager
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from sqlalchemy import create_engine
@@ -22,33 +23,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-@app.route('/book_catalog/books/JSON')
-def bookCatalogJSON():
-    """Returns all books in JSON format"""
-    books = session.query(Book).all()
-    return jsonify(books=[b.serialize for b in books])
+apimanager = APIManager(app, session=session)
 
-
-@app.route('/book_catalog/categories/JSON')
-def categoryJSON():
-    """Returns all categories in JSON format"""
-    categories = session.query(Category).all()
-    return jsonify(categories=[b.serialize for b in categories])
-
-
-@app.route('/book_catalog/categories/<int:category_id>/books/JSON')
-def categoryBookJSON(category_id):
-    """Returns all books of a specified category id in JSON format"""
-    category= session.query(Category).filter_by(id=category_id).one()
-    books = session.query(Book).filter_by(category_id=category_id).all()
-    return jsonify(books=[b.serialize for b in books])
-
-
-@app.route('/book_catalog/books/<int:book_id>/JSON')
-def bookJSON(book_id):
-    """Returns a book of a specified book id in JSON format"""
-    book = session.query(Book).filter_by(id=book_id).one()
-    return jsonify(book=book.serialize)
+apimanager.create_api(User, methods=['GET'])
+apimanager.create_api(Category, methods=['GET'])
+apimanager.create_api(Book, methods=['GET'])
 
 
 @app.route('/login')
