@@ -6,7 +6,7 @@ with setups.
 
 ## How to run the app
 
-The app uses PostgreSQL. The databse `catalog` should be created
+The app uses PostgreSQL. The database `catalog` should be created
 on PostgreSQL.
 
 ```
