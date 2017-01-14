@@ -46,7 +46,7 @@ for book_data in seed_data['book']:
              title=book_data['title'],
              author=book_data['author'] if 'author' in book_data else None,
              description=description,
-             price=book_data['price'] if 'price' in book_data else None,
+             price=book_data['price'] if 'price' in book_data else '$0.00',
              category=categories[book_data['category']])
     session.add(b)
 
