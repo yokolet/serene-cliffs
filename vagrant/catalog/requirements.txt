@@ -52,7 +52,7 @@ python-dateutil==2.6.0
 python-debian==0.1.21-nmu2ubuntu2
 python-mimeparse==1.6.0
 redis==2.10.5
-requests==2.2.1
+requests==2.20.0
 rsa==3.4.2
 simplejson==3.3.1
 six==1.10.0
